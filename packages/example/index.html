@@ -77,11 +77,40 @@
 
       canvas {
         display: block;
-        margin: 16px 0 0;
         border-radius: 12px;
         background: #030712;
         width: 100%;
         aspect-ratio: 4/3;
+      }
+
+      .map-wrap {
+        position: relative;
+        margin-top: 16px;
+      }
+
+      .map-wrap canvas {
+        margin: 0;
+      }
+
+      #batch-ms {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        padding: 6px 9px;
+        border-radius: 8px;
+        background: rgba(3, 7, 18, 0.78);
+        color: #86efac;
+        font: 12px/1.4 ui-monospace, SFMono-Regular, Menlo, monospace;
+        pointer-events: none;
+        white-space: nowrap;
+      }
+
+      #batch-ms[data-within-budget="false"] {
+        color: #fca5a5;
+      }
+
+      .batch-meta {
+        display: none;
       }
 
       pre {
@@ -108,8 +137,15 @@
         <button id="btn-hello" type="button">GET /hello</button>
         <button id="btn-time" type="button">GET /time</button>
         <button id="btn-express" type="button">GET /express-hello</button>
+        <button id="btn-local-bench" type="button">本机八千点压测</button>
       </div>
-      <canvas id="game" width="800" height="600"></canvas>
+      <div class="map-wrap">
+        <canvas id="game" width="800" height="600"></canvas>
+        <output id="batch-ms" data-testid="batch-ms" data-batch-ms="0">等待增量…</output>
+        <span id="batch-time" data-testid="batch-time" class="batch-meta" aria-hidden="true"></span>
+        <span id="batch-duration" data-testid="batch-duration" class="batch-meta" aria-hidden="true"></span>
+        <span id="perf" data-testid="perf" class="batch-meta" aria-hidden="true"></span>
+      </div>
       <pre id="log">Ready.</pre>
     </main>
     <script type="module" src="/src/client.ts"></script>
